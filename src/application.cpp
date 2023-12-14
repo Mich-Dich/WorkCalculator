@@ -1,13 +1,13 @@
 #include "pch.h"
 
-#include <fstream>
-#include <filesystem>
+#include "core/Logger.h"
 
 #include "application.h"
 
 //
 Application::Application() {
 
+	Logger::Log_Init("mainLogFile.txt", "[$B$T:$J$E] [$B$L$X - $A - $F:$G$E] $C$Z");
 	// Create Window
 
 }
@@ -20,6 +20,7 @@ void Application::Run() {
 	
 	General_Settings settings = {true, 16};
 	Save_General_Settings(settings);
+	Test_Time_System();
 }
 
 //

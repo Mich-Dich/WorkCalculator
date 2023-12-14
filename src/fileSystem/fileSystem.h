@@ -17,8 +17,6 @@ struct Time_point_date {
 	int year;
 	int month;
 	int day;
-	int hour;
-	int min;
 };
 
 struct Job_Settings {
@@ -29,6 +27,26 @@ struct Job_Settings {
 	int max_h_per_week;						// max working hours per week
 };
 
-void TestFileSysstem();
+
+struct WorkRecord_Day {
+	Time_point_date date;
+	Time_Point start_time;
+	Time_Point end_time;
+};
+
+struct WorkRecord_Week {
+	float hours_Worked;
+	float salary;
+	std::vector<WorkRecord_Day> worked_Days;
+};
+
+struct WorkRecord_Month {
+	float hours_worked;
+	float salary;
+	std::vector<WorkRecord_Week> worked_Weeks;
+};
+
+
+void Test_Time_System();
 
 void Save_General_Settings(General_Settings settings);

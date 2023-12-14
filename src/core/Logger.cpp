@@ -9,8 +9,8 @@ namespace Logger {
 
     static const char* SeverityNames[LogMsgSeverity::NUM_SEVERITIES]{ "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL" };
     static const char* LogFileName = "logs/logFile.txt";
-    static const char* LogMessageFormat = "[$B$T:$J$E] [$B$L$X - $A - $F:$G$E] $C";
-    static const char* LogMessageFormat_BACKUP = "$B[$T] $L$E - $C";
+    static const char* LogMessageFormat = "[$B$T:$J$E] [$B$L$X - $A - $F:$G$E] $C$Z";
+    static const char* LogMessageFormat_BACKUP = "[$B$T:$J$E] [$B$L$X - $A - $F:$G$E] $C$Z";
     static const char* displayed_Path_Start = "WorkCalculator\\WorkCalculator";
     static const char* displayed_FuncName_Start = "Gluttony::";
     static const char* ConsoleRESET = "\x1b[97m\x1b[40m";

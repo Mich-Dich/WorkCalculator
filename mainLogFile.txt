@@ -1,0 +1,13 @@
+[2023/12/14 - 22:34:05]  Log initialized
+   Inital Log Format: '[$B$T:$J$E] [$B$L$X - $A - $F:$G$E] $C$Z'
+   Enabled Log Levels: Fatal + Error + Warn + Info + Debug + Trace
+====================================================================================================================
+[[90m22:34:05:034[97m[40m] [[90mTRACE - src\core\Logger.cpp - Logger::Log_Init:66[97m[40m] Subsystem [Logger] initialized
+[[90m22:34:05:035[97m[40m] [[90mTRACE - src\fileSystem\fileSystem.cpp - Save_General_Settings:17[97m[40m] file: [settings/General_settings.txt] is open
+[[90m22:34:05:038[97m[40m] [[90mTRACE - src\fileSystem\fileSystem.cpp - Test_Time_System:30[97m[40m] Current time: 2023-12-14 22:34:05
+[[94m22:34:05:040[97m[40m] [[94mDEBUG - src\fileSystem\fileSystem.cpp - Test_Time_System:31[97m[40m] Week-day: 3
+[[90m22:34:05:042[97m[40m] [[90mTRACE - src\fileSystem\fileSystem.cpp - Test_Time_System:40[97m[40m] Year: 2023
+[[90m22:34:05:043[97m[40m] [[90mTRACE - src\fileSystem\fileSystem.cpp - Test_Time_System:41[97m[40m] Month: 12
+[[90m22:34:05:044[97m[40m] [[90mTRACE - src\fileSystem\fileSystem.cpp - Test_Time_System:42[97m[40m] Day: 14
+[[90m22:34:05:045[97m[40m] [[90mTRACE - src\fileSystem\fileSystem.cpp - Test_Time_System:43[97m[40m] Day of the week: 3
+[[90m22:34:05:047[97m[40m] [[90mTRACE - src\fileSystem\fileSystem.cpp - Test_Time_System:44[97m[40m] Day of the year: 0
