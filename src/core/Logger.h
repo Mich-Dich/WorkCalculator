@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 
-#include "pch.h"
-
 #define ENABLE_VALIDATION
 #define ENABLED_ASSERTS
 

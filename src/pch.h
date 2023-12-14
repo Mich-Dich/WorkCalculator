@@ -26,6 +26,4 @@
 
 #include "core/Logger.h"
 
-#ifdef GL_PLATFORM_WINDOWS
-#include <Windows.h>
-#endif
+#define BIT(x) (1 << x)

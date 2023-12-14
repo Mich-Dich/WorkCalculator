@@ -4,18 +4,38 @@
     <Filter Include="core">
       <UniqueIdentifier>{4E40957C-3A77-960D-E363-7C10CF79120F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="events">
+      <UniqueIdentifier>{5A9D08FC-463F-33D2-2FFA-46261B3BBA22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileSystem">
+      <UniqueIdentifier>{8A9ED86D-7656-1ABB-DF5D-F316CB34B5AB}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\application.h" />
     <ClInclude Include="src\core\Logger.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="src\events\event.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\keyEvent.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fileSystem\fileSystem.h">
+      <Filter>fileSystem</Filter>
+    </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\events\applicationEvent.h" />
+    <ClInclude Include="src\events\mouseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\core\Logger.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fileSystem\fileSystem.cpp">
+      <Filter>fileSystem</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp" />
