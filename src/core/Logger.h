@@ -22,7 +22,7 @@ namespace Logger {
 	static const char* SeperatorStringBig = "====================================================================================================================";
 	static const char* SeperatorStringSmall = "--------------------------------------------------------------------------------------------------------------------";
 
-	int Log_Init(const char* LogCoreFile, const char* LogFile, const char* Format);
+	int Log_Init(const char* LogFile, const char* Format);
 
 	/*  Formating the LogMessages can be customised with the following tags
 		to format all following Log Messages use: set_Formating(char* format);
@@ -62,7 +62,7 @@ namespace Logger {
 	void set_buffer_Level(int newLevel);
 	void LogMsg(LogMsgSeverity level, const char* fileName, const char* funcName, int line, const char* message);
 	const char* extractFileName(const char* filePath);
-
+	std::string getRelativePath(const std::string& fullPath, const std::string& directory);
 
 	class LogMessage : public std::ostringstream {
 
@@ -93,77 +93,46 @@ namespace Logger {
 #define MAX_MEASSGE_SIZE 1024
 
 
-//  ===================================================================================  Client Logger  ===================================================================================
+//  ===================================================================================  Logger Macro  ===================================================================================
 
 	#define GL_LOG_Fatal(message)					{ Logger::LogMessage(Logger::LogMsgSeverity::Fatal,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
 	#define GL_LOG_Error(message)					{ Logger::LogMessage(Logger::LogMsgSeverity::Error,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
 
-#if LOG_LEVEL_ENABLED >= 1
-	#define GL_LOG_Warn(message, ...)				{ Logger::LogMessage(Logger::LogMsgSeverity::Warn,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
-#else
-	#define GL_LOG_Warn(message, ...)				{;}
-#endif
-
-#if LOG_LEVEL_ENABLED >= 2
-	#define GL_LOG_Info(message, ...)				{ Logger::LogMessage(Logger::LogMsgSeverity::Info,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
-#else
-	#define GL_LOG_Info(message, ...)				{;}
-#endif
-
-#if LOG_LEVEL_ENABLED >= 3
-	#define GL_LOG_Debug(message, ...)				{ Logger::LogMessage(Logger::LogMsgSeverity::Debug,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
-#else
-	#define GL_LOG_Debug(message, ...)				{;}
-#endif
-
-#if LOG_LEVEL_ENABLED >= 4
-	#define GL_LOG_Trace(message, ...)				{ Logger::LogMessage(Logger::LogMsgSeverity::Trace,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
-#else
-	#define GL_LOG_Trace(message, ...)				{;}
-#endif
-
-	#define GL_LOG(severity, message)					GL_LOG_##severity(message)
-
-//  ===================================================================================  Core Logger  ===================================================================================
-
-	#define GL_CORE_LOG_Fatal(message)				{ Logger::LogMessage(Logger::LogMsgSeverity::Fatal,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
-	#define GL_CORE_LOG_Error(message)				{ Logger::LogMessage(Logger::LogMsgSeverity::Error,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
-
 #if CORE_LOG_LEVEL_ENABLED >= 1
-	#define GL_CORE_LOG_Warn(message)				{ Logger::LogMessage(Logger::LogMsgSeverity::Warn,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
+	#define GL_LOG_Warn(message)					{ Logger::LogMessage(Logger::LogMsgSeverity::Warn,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
 #else
-	#define GL_CORE_LOG_Warn(message)				{;}
+	#define GL_LOG_Warn(message)					{;}
 #endif
 
 #if CORE_LOG_LEVEL_ENABLED >= 2
-	#define GL_CORE_LOG_Info(message)				{ Logger::LogMessage(Logger::LogMsgSeverity::Info,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
+	#define GL_LOG_Info(message)					{ Logger::LogMessage(Logger::LogMsgSeverity::Info,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
 #else
-	#define GL_CORE_LOG_Info(message)				{;}
+	#define GL_LOG_Info(message)					{;}
 #endif
 
 #if CORE_LOG_LEVEL_ENABLED >= 3
-	#define GL_CORE_LOG_Debug(message)				{ Logger::LogMessage(Logger::LogMsgSeverity::Debug,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
+	#define GL_LOG_Debug(message)					{ Logger::LogMessage(Logger::LogMsgSeverity::Debug,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
 #else
-	#define GL_CORE_LOG_Debug(message)				{;}
+	#define GL_LOG_Debug(message)					{;}
 #endif
 
 #if CORE_LOG_LEVEL_ENABLED >= 4
-	#define GL_CORE_LOG_Trace(message)				{ Logger::LogMessage(Logger::LogMsgSeverity::Trace,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
-	#define GL_CORE_LOG_SEPERATOR					Logger::Set_Format("$C$Z");										\
-													GL_CORE_LOG_Trace(Logger::SeperatorStringSmall)					\
+	#define GL_LOG_Trace(message)					{ Logger::LogMessage(Logger::LogMsgSeverity::Trace,__FILE__,__FUNCTION__,__LINE__).flush() << message; }
+	#define GL_LOG_SEPERATOR						Logger::Set_Format("$C$Z");										\
+													GL_LOG_Trace(Logger::SeperatorStringSmall)						\
 													Logger::Use_Format_Backup();
 
-	#define GL_CORE_LOG_SEPERATOR_BIG				Logger::Set_Format("$C$Z");										\
-													GL_CORE_LOG_Trace(Logger::SeperatorStringBig)						\
+	#define GL_LOG_SEPERATOR_BIG					Logger::Set_Format("$C$Z");										\
+													GL_LOG_Trace(Logger::SeperatorStringBig)						\
 													Logger::Use_Format_Backup();
 #else
-	#define GL_CORE_LOG_Trace(message, ...)			{;}
-	#define GL_CORE_LOG_SEPERATOR					{;}
-	#define GL_CORE_LOG_SEPERATOR_BIG				{;}
+	#define GL_LOG_Trace(message, ...)				{;}
+	#define GL_LOG_SEPERATOR						{;}
+	#define GL_LOG_SEPERATOR_BIG					{;}
 #endif
 
 
-#define GL_CORE_LOG(severity, message)				GL_CORE_LOG_##severity(message)
+#define GL_LOG(severity, message)					GL_LOG_##severity(message);
 
 #define THROW_ERR(message)							throw std::runtime_error(message)
 
@@ -171,11 +140,11 @@ namespace Logger {
 // ---------------------------------------------------------------------------  Assertion & Validation  ---------------------------------------------------------------------------
 
 #ifdef ENABLED_ASSERTS
-	#define GL_CORE_ASSERT(expr, successMsg, failureMsg)						\
+	#define GL_ASSERT(expr, successMsg, failureMsg)								\
 			if (expr) {															\
-				GL_CORE_LOG(Trace, successMsg);									\
+				GL_LOG(Trace, successMsg);										\
 			} else {															\
-				GL_CORE_LOG(Fatal, failureMsg);									\
+				GL_LOG(Fatal, failureMsg);										\
 				THROW_ERR(failureMsg);											\
 			}
 #else
@@ -184,11 +153,11 @@ namespace Logger {
 
 
 #ifdef ENABLE_VALIDATION
-	#define GL_CORE_VALIDATE(expr, successMsg, failureMsg, RetVal)				\
+	#define GL_VALIDATE(expr, successMsg, failureMsg, RetVal)					\
 			if (expr) {															\
-				GL_CORE_LOG(Trace, successMsg);									\
+				GL_LOG(Trace, successMsg);										\
 			} else {															\
-				GL_CORE_LOG(Warn, failureMsg);									\
+				GL_LOG(Warn, failureMsg);										\
 				RetVal;															\
 			}
 #else

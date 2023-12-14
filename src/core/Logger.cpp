@@ -8,11 +8,10 @@
 namespace Logger {
 
     static const char* SeverityNames[LogMsgSeverity::NUM_SEVERITIES]{ "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL" };
-    static const char* LogFileName = "logFile.txt";
-    static const char* LogCoreFileName = "logFileCORE.txt";
+    static const char* LogFileName = "logs/logFile.txt";
     static const char* LogMessageFormat = "[$B$T:$J$E] [$B$L$X - $A - $F:$G$E] $C";
     static const char* LogMessageFormat_BACKUP = "$B[$T] $L$E - $C";
-    static const char* displayed_Path_Start = "VulkanTest\\";
+    static const char* displayed_Path_Start = "WorkCalculator\\WorkCalculator";
     static const char* displayed_FuncName_Start = "Gluttony::";
     static const char* ConsoleRESET = "\x1b[97m\x1b[40m";
     static int Buffer_Level;
@@ -27,9 +26,8 @@ namespace Logger {
       "\x1b[41m\x1b[30m",   // Red Background
     };
 
-    int Log_Init(const char* LogCoreFile, const char* LogFile, const char* Format) {
+    int Log_Init(const char* LogFile, const char* Format) {
 
-        LogCoreFileName = LogCoreFile;
         LogFileName = LogFile;
         Set_Format(Format);
 
@@ -65,7 +63,7 @@ namespace Logger {
             return -1;
         }
 
-        GL_CORE_LOG(Trace, "Subsystem [Logger] initialized");
+        GL_LOG(Trace, "Subsystem [Logger] initialized");
         //GL_CORE_LOG_SEPERATOR_BIG;
         return 0;
     }
@@ -159,7 +157,7 @@ namespace Logger {
 
                     // File Name
                 case 'A':
-                    Format_Filled << fileName;
+                    Format_Filled << getRelativePath(fileName, displayed_Path_Start);
                     break;
 
 
@@ -278,4 +276,14 @@ namespace Logger {
 
         LogMsg(m_Severity, m_FileName, m_FuncName, m_Line, str().c_str());
     }
+
+    std::string getRelativePath(const std::string& fullPath, const std::string& directory) {
+
+        size_t pos = fullPath.find(directory);
+        if (pos != std::string::npos) 
+            return fullPath.substr(pos + directory.length() + 1);
+        
+        return fullPath;
+    }
+
 }
