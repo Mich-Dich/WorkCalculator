@@ -164,7 +164,4 @@ namespace Logger {
 
 
 #define VALID_VAR_MSG(var)								"[" #var << "] is valid"
-
 #define INVALID_VAR_MSG(var)							"[" #var << "] is INVALID"
-
-#define VAR_VALIDATION(var)								"[" #var << "] is valid", "[" #var << "] is INVALID"

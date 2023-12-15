@@ -1,16 +1,19 @@
 #include "pch.h"
-
 #include "application.h"
 #include "core/fileSystem.h"
 
 #include <chrono>
 #include <ctime>
 
+
+using namespace std;
+
 //
 Application::Application() {
 
 	Logger::Log_Init("mainLogFile.txt", "[$B$T:$J$E] [$B$L$X - $A - $F:$G$E] $C$Z");
     m_WorkRecord = new WorkRecord();
+    m_HUD = new imgui_hud();
 
     if (!Try_loading_General_Settings(m_General_Settings)) {
 
@@ -59,8 +62,27 @@ Application::Application() {
         Save_Job_Settings(m_Job_Settings);
     }
 
-	// Create Window
+	// Setup Window
+    GL_ASSERT(glfwInit(), "", "[glfwInit] FAILED");
 
+    const char* glsl_version = "#version 330 core";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+    // Create Window with graphics Context
+    m_Window = glfwCreateWindow(1280, 720, "Work Calculator", NULL, NULL);
+    GL_ASSERT(m_Window != NULL, "", "Failed to Create Window");
+
+    glfwMakeContextCurrent(m_Window);
+    glfwSwapInterval(1);    // Enable VSync
+
+    GL_ASSERT(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "", "Unable to Context to OpenGL");   // tie window context to glad's opengl funcs
+
+    int Screen_Width, Screen_Height;
+    glfwGetFramebufferSize(m_Window, &Screen_Width, &Screen_Height);
+    glViewport(0, 0, Screen_Width, Screen_Height);
+
+    m_HUD->Init(m_Window, glsl_version);
 }
 
 //
@@ -68,8 +90,20 @@ Application::~Application() {}
 
 //
 void Application::Run() {
-    std::string ConsoleCommand;
 
+
+    while (!glfwWindowShouldClose(m_Window)) {
+
+        glfwPollEvents();
+        glClear(GL_COLOR_BUFFER_BIT);
+        m_HUD->NewFrame();
+        m_HUD->Update();
+        m_HUD->Render();
+        glfwSwapBuffers(m_Window);
+    }
+
+    /*
+    std::string ConsoleCommand;
     while (m_Running) {
 
         std::cout << std::endl << "Enter a Command: ";
@@ -153,14 +187,18 @@ void Application::Run() {
         // INVALID command
         else
             std::cout << "INVALID Command" << std::endl;
-        
     }
-
-
+*/
 }
 
 //
-void Application::Shutdown() {}
+void Application::Shutdown() {
+
+    m_HUD->Shutdown();
+    m_HUD->Shutdown();
+    delete m_HUD;
+    delete m_WorkRecord;
+}
 
 Time_point_date Application::Get_Time() {
 
