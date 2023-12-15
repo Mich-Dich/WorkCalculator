@@ -1,0 +1,6 @@
+[submodule "WorkCalculator/vendor/GLFW"]
+	path = WorkCalculator/vendor/GLFW
+	url = https://github.com/Mich-Dich/glfw
+[submodule "WorkCalculator/vendor/ImGui"]
+	path = WorkCalculator/vendor/ImGui
+	url = https://github.com/Mich-Dich/imgui

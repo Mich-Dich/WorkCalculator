@@ -1,0 +1,14 @@
+# Directories
+.vs/
+bin/
+bin-int/
+WorkCalculator/logs/*
+WorkCalculator/saves/*
+WorkCalculator/settings/*
+WorkCalculator/ApplicationLogs/
+WorkCalculator/savefiles/*
+
+# Files
+*.user
+*.vcxproj
+**.vcxproj
