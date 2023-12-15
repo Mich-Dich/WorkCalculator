@@ -25,5 +25,6 @@
 #include <iomanip>
 
 #include "core/Logger.h"
+#include "core/defines.h"
 
 #define BIT(x) (1 << x)

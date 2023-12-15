@@ -22,22 +22,25 @@
     <ClInclude Include="src\events\keyEvent.h">
       <Filter>events</Filter>
     </ClInclude>
-    <ClInclude Include="src\fileSystem\fileSystem.h">
+    <ClInclude Include="src\core\fileSystem.h">
       <Filter>fileSystem</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\events\applicationEvent.h" />
     <ClInclude Include="src\events\mouseEvent.h" />
+    <ClInclude Include="src\core\defines.h" />
+    <ClInclude Include="src\WorkRecord.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\core\Logger.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="src\fileSystem\fileSystem.cpp">
+    <ClCompile Include="src\core\fileSystem.cpp">
       <Filter>fileSystem</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\WorkRecord.cpp" />
   </ItemGroup>
 </Project>

@@ -4,8 +4,7 @@
 
 int main(int argc, char** argv) {
 
-	Application* app = CreateApplication();
+	Application* app = new Application();
 	app->Run();
-	app->Shutdown();
 	delete app;
 }

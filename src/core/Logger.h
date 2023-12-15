@@ -151,13 +151,20 @@ namespace Logger {
 
 
 #ifdef ENABLE_VALIDATION
-	#define GL_VALIDATE(expr, successMsg, failureMsg, RetVal)					\
+	#define GL_VALIDATE(expr, successMsg, failureMsg, RetCommand)				\
 			if (expr) {															\
 				GL_LOG(Trace, successMsg);										\
 			} else {															\
 				GL_LOG(Warn, failureMsg);										\
-				RetVal;															\
+				RetCommand;														\
 			}
 #else
-	#define GL_CORE_VALIDATE(expr, successMsg, failureMsg, RetVal)				{expr;}
+	#define GL_CORE_VALIDATE(expr, successMsg, failureMsg, RetCommand)			{expr;}
 #endif // ENABLE_VALIDATION
+
+
+#define VALID_VAR_MSG(var)								"[" #var << "] is valid"
+
+#define INVALID_VAR_MSG(var)							"[" #var << "] is INVALID"
+
+#define VAR_VALIDATION(var)								"[" #var << "] is valid", "[" #var << "] is INVALID"

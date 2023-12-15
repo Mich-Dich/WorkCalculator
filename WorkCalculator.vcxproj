@@ -144,22 +144,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\application.h" />
+    <ClInclude Include="src\core\defines.h" />
     <ClInclude Include="src\core\Logger.h" />
     <ClInclude Include="src\events\applicationEvent.h" />
     <ClInclude Include="src\events\event.h" />
     <ClInclude Include="src\events\keyEvent.h" />
     <ClInclude Include="src\events\mouseEvent.h" />
-    <ClInclude Include="src\fileSystem\fileSystem.h" />
+    <ClInclude Include="src\core\fileSystem.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\WorkRecord.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\core\Logger.cpp" />
-    <ClCompile Include="src\fileSystem\fileSystem.cpp" />
+    <ClCompile Include="src\core\fileSystem.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\WorkRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
