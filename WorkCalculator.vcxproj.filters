@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="HUD">
+      <UniqueIdentifier>{66F0870B-D2F9-877C-5B75-9E7CC77D937C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="core">
       <UniqueIdentifier>{4E40957C-3A77-960D-E363-7C10CF79120F}</UniqueIdentifier>
     </Filter>
     <Filter Include="events">
       <UniqueIdentifier>{5A9D08FC-463F-33D2-2FFA-46261B3BBA22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="fileSystem">
-      <UniqueIdentifier>{8A9ED86D-7656-1ABB-DF5D-F316CB34B5AB}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\HUD\imgui_hud.h">
+      <Filter>HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorkRecord.h" />
     <ClInclude Include="src\application.h" />
     <ClInclude Include="src\core\Logger.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\defines.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\fileSystem.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\applicationEvent.h">
+      <Filter>events</Filter>
     </ClInclude>
     <ClInclude Include="src\events\event.h">
       <Filter>events</Filter>
@@ -22,25 +35,24 @@
     <ClInclude Include="src\events\keyEvent.h">
       <Filter>events</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\fileSystem.h">
-      <Filter>fileSystem</Filter>
+    <ClInclude Include="src\events\mouseEvent.h">
+      <Filter>events</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\events\applicationEvent.h" />
-    <ClInclude Include="src\events\mouseEvent.h" />
-    <ClInclude Include="src\core\defines.h" />
-    <ClInclude Include="src\WorkRecord.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\HUD\imgui_hud.cpp">
+      <Filter>HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorkRecord.cpp" />
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\core\Logger.cpp">
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="src\core\fileSystem.cpp">
-      <Filter>fileSystem</Filter>
+      <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\WorkRecord.cpp" />
   </ItemGroup>
 </Project>

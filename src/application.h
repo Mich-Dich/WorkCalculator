@@ -2,6 +2,10 @@
 
 #include "WorkRecord.h"
 
+#include "HUD/imgui_hud.h"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+
 // ---------------------------------- Settings ----------------------------------
 
 struct General_Settings {
@@ -10,6 +14,7 @@ struct General_Settings {
 	uint16_t fontSize;
 };
 
+// MOVE TO WorkRecord.h
 struct Job_Settings {
 	int Struct_Version = 1;
 	double pay_per_h;						// hourly pay (standart)
@@ -35,6 +40,8 @@ private:
 	Time_point_date Get_Time();
 	bool m_Running = true;
 
+	GLFWwindow* m_Window;
+	imgui_hud* m_HUD;
 	General_Settings m_General_Settings;
 	Job_Settings m_Job_Settings;
 	WorkRecord* m_WorkRecord;
